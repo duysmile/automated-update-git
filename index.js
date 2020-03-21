@@ -20,6 +20,7 @@ app.get('/git', async (req, res) => {
     }
 });
 
-app.listen(3000, () => {
-    console.log('Server start at port 3000');
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Server start at port ${port}`);
 });
