@@ -46,9 +46,11 @@ async function main() {
         shell.exit(1);
     } else {
         const isGitInit = await checkIfGitInit();
+        console.log('........', isGitInit);
         if (!isGitInit) {
             await initGit();
         }
+        console.log('init git');
         // await addRemoteGit('https://github.com/duysmile/temp-data.git');
 
         await createFile('test1.txt');
