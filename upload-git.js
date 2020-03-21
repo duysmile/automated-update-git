@@ -46,11 +46,11 @@ async function main() {
         shell.echo('Sorry, this script requires git');
         shell.exit(1);
     } else {
-        const isGitInit = await checkIfGitInit();
+        // const isGitInit = await checkIfGitInit();
         console.log('........', isGitInit);
-        if (!isGitInit) {
+        // if (!isGitInit) {
             await initGit();
-        }
+        // }
         console.log('init git');
         // await addRemoteGit('https://github.com/duysmile/temp-data.git');
 
