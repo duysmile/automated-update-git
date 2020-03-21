@@ -1,50 +1,25 @@
-const shell = require('shelljs');
+const express = require('express');
 
-function promisifyCommand(command) {
-    return new Promise((resolve, reject) => {
-        shell.exec(command, (err, stdout, stderr) => {
-            if (err) {
-                return reject(err);
-            }
+const uploadGit = require('./upload-git');
 
-            // console.error(stderr);
-            return resolve(stdout && stdout.trim());
-        });
-    });
-}
+const app = express();
 
-function checkIfGitInit() {
-    return promisifyCommand('git rev-parse --is-inside-work-tree');
-}
+app.use(express.json());
 
-async function initGit() {
-    const result = await promisifyCommand('git init');
-    return result == 'true';
-}
+app.get('/', (req, res) => {
+    res.send('ok');
+});
 
-function createFile(fileName) {
-    return promisifyCommand(`touch ${fileName}`);
-}
-
-async function pushToGit() {
-    await promisifyCommand('git add .');
-    await promisifyCommand('git commit -m "message here"');
-    await promisifyCommand('git push origin master');
-}
-
-async function main() {
-    if (!shell.which('git')) {
-        shell.echo('Sorry, this script requires git');
-        shell.exit(1);
-    } else {
-        const isGitInit = await checkIfGitInit();
-        if (!isGitInit) {
-            await initGit();
-        }
-
-        await createFile('test.txt');
-        await pushToGit();
+app.get('/git', async (req, res) => {
+    try {
+         await uploadGit();
+         return res.send('success');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('failed');
     }
-}
+});
 
-main();
+app.listen(3000, () => {
+    console.log('Server start at port 3000');
+});
