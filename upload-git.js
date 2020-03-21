@@ -37,6 +37,7 @@ async function pushToGit() {
 }
 
 async function pullGit() {
+    await promisifyCommand(`git stash`);
     await promisifyCommand(`git pull https://${USERNAME}:${PASSWORD}@github.com/duysmile/temp-data.git master`);
 }
 
