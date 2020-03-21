@@ -18,6 +18,7 @@ function promisifyCommand(command) {
 }
 
 function checkIfGitInit() {
+    console.log('herrrrrr');
     return promisifyCommand('git rev-parse --is-inside-work-tree');
 }
 
