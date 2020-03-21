@@ -59,10 +59,11 @@ async function main() {
         // console.log('........', isGitInit);
         // if (!isGitInit) {
         await initGit();
+        await addRemoteGit('https://github.com/duysmile/temp-data.git');
         await pullGit();
         await configGit();
         // }
-        // await addRemoteGit('https://github.com/duysmile/temp-data.git');
+       
 
         await createFile('test1.txt');
         await pushToGit();
