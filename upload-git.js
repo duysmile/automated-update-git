@@ -18,7 +18,6 @@ function promisifyCommand(command) {
 }
 
 function checkIfGitInit() {
-    console.log('herrrrrr');
     return promisifyCommand('git rev-parse --is-inside-work-tree');
 }
 
@@ -41,6 +40,11 @@ function addRemoteGit(remote) {
     return promisifyCommand(`git remote add ${UPLOAD_REMOTE} ${remote}`);
 }
 
+async function configGit() {
+    await promisifyCommand('git config --global user.email "duy210697@gmail.com"');
+    await promisifyCommand('git config --global user.name "duy21"');
+} 
+
 async function main() {
     if (!shell.which('git')) {
         shell.echo('Sorry, this script requires git');
@@ -49,9 +53,9 @@ async function main() {
         // const isGitInit = await checkIfGitInit();
         // console.log('........', isGitInit);
         // if (!isGitInit) {
-            await initGit();
+        await initGit();
+        await configGit();
         // }
-        console.log('init git');
         // await addRemoteGit('https://github.com/duysmile/temp-data.git');
 
         await createFile('test1.txt');
