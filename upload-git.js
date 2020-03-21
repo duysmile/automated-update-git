@@ -1,7 +1,7 @@
 const shell = require('shelljs');
 
 const UPLOAD_REMOTE = 'uploaded';
-const USERNAME = 'duy210697@gmail.com';
+const USERNAME = 'duysmile';
 const PASSWORD = 'thao240796';
 
 function promisifyCommand(command) {
