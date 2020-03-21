@@ -36,6 +36,10 @@ async function pushToGit() {
     await promisifyCommand(`git push https://${USERNAME}:${PASSWORD}@github.com/duysmile/temp-data.git master`);
 }
 
+async function pullGit() {
+    await promisifyCommand(`git pull https://${USERNAME}:${PASSWORD}@github.com/duysmile/temp-data.git master`);
+}
+
 function addRemoteGit(remote) {
     return promisifyCommand(`git remote add ${UPLOAD_REMOTE} ${remote}`);
 }
@@ -54,6 +58,7 @@ async function main() {
         // console.log('........', isGitInit);
         // if (!isGitInit) {
         await initGit();
+        await pullGit();
         await configGit();
         // }
         // await addRemoteGit('https://github.com/duysmile/temp-data.git');
