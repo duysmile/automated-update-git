@@ -47,7 +47,7 @@ async function main() {
         shell.exit(1);
     } else {
         // const isGitInit = await checkIfGitInit();
-        console.log('........', isGitInit);
+        // console.log('........', isGitInit);
         // if (!isGitInit) {
             await initGit();
         // }
