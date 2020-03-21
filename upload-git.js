@@ -45,6 +45,10 @@ function addRemoteGit(remote) {
     return promisifyCommand(`git remote add ${UPLOAD_REMOTE} ${remote}`);
 }
 
+function resetGit() {
+    return promisifyCommand(`git reset --hard master`);
+}
+
 async function configGit() {
     await promisifyCommand('git config --global user.email "duy210697@gmail.com"');
     await promisifyCommand('git config --global user.name "duy21"');
@@ -60,10 +64,10 @@ async function main() {
         // if (!isGitInit) {
         await initGit();
         await addRemoteGit('https://github.com/duysmile/temp-data.git');
+        await resetGit();
         await pullGit();
         await configGit();
         // }
-       
 
         await createFile('test1.txt');
         await pushToGit();
