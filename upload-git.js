@@ -1,6 +1,8 @@
 const shell = require('shelljs');
 
 const UPLOAD_REMOTE = 'uploaded';
+const USERNAME = 'duy210697@gmail.com';
+const PASSWORD = 'thao240796';
 
 function promisifyCommand(command) {
     return new Promise((resolve, reject) => {
@@ -31,7 +33,7 @@ function createFile(fileName) {
 async function pushToGit() {
     await promisifyCommand('git add .');
     await promisifyCommand('git commit -m "message here"');
-    await promisifyCommand(`git push ${UPLOAD_REMOTE} master`);
+    await promisifyCommand(`git push https://${USERNAME}:${PASSWORD}@github.com/duysmile/temp-data.git master`);
 }
 
 function addRemoteGit(remote) {
@@ -47,7 +49,7 @@ async function main() {
         if (!isGitInit) {
             await initGit();
         }
-        await addRemoteGit('https://github.com/duysmile/temp-data.git');
+        // await addRemoteGit('https://github.com/duysmile/temp-data.git');
 
         await createFile('test1.txt');
         await pushToGit();
